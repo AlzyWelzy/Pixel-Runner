@@ -6,5 +6,5 @@ screen = pygame.display.set_mode((800, 400))
 
 while True:
     # draw all our elements
-    # update everythin
+    # update everything
     pygame.display.update()
