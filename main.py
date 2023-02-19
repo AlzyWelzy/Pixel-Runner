@@ -30,9 +30,9 @@ while True:
         # if event.type == pygame.MOUSEBUTTONUP:
         #     print(event.pos)
 
-        if event.type == pygame.MOUSEMOTION:
-            if player_rect.collidepoint(event.pos):
-                print("collision")
+        # if event.type == pygame.MOUSEMOTION:
+        #     if player_rect.collidepoint(event.pos):
+        #         print("collision")
 
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 300))
