@@ -2,7 +2,6 @@ import pygame  # importing pygame
 from sys import exit
 
 pygame.init()
-# screen = pygame.display.set_mode((width, height))
 screen = pygame.display.set_mode((800, 400))
 pygame.display.set_caption("Runner")
 clock = pygame.time.Clock()
@@ -15,8 +14,6 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-    # draw all our elements
-    # update everything
 
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 300))
