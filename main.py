@@ -22,6 +22,8 @@ score_rect = score_surf.get_rect(center=(400, 50))
 player_surf = pygame.image.load("./graphics/Player/player_walk_1.png").convert_alpha()
 player_rect = player_surf.get_rect(midbottom=(80, 300))
 
+player_gravity = 0
+
 while True:
     mouse_pos = pygame.mouse.get_pos()
     for event in pygame.event.get():
@@ -63,6 +65,7 @@ while True:
     if snail_rect.right <= 0:
         snail_rect.left = 800
     screen.blit(snail_surf, snail_rect)
+
     screen.blit(player_surf, player_rect)
 
     # keys = pygame.key.get_pressed()
