@@ -14,7 +14,8 @@ ground_surface = pygame.image.load("./graphics/ground.png").convert()
 snail_surf = pygame.image.load("./graphics/snail/snail1.png").convert_alpha()
 snail_rect = snail_surf.get_rect(bottomright=(600, 300))
 
-score_surf = test_font.render("Score", False, "Black")
+# score_surf = test_font.render("Score", False, (64, 64, 64))
+score_surf = test_font.render("Score", False, "#404040")
 score_rect = score_surf.get_rect(center=(400, 50))
 
 
@@ -28,6 +29,16 @@ while True:
             pygame.quit()
             exit()
 
+        if event.type == pygame.KEYDOWN:
+            # print("Key Down")
+            if event.key == pygame.K_SPACE:
+                print("Jump Down")
+
+        if event.type == pygame.KEYUP:
+            print("Key Up")
+            # if event.key == pygame.K_SPACE:
+            #     print("Jump Down")
+
         # if event.type == pygame.MOUSEMOTION:
         # if event.type == pygame.MOUSEBUTTONDOWN:
         # if event.type == pygame.MOUSEBUTTONUP:
@@ -40,8 +51,8 @@ while True:
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 300))
     # screen.blit(text_surface, (300, 50))
-    pygame.draw.rect(screen, "Pink", score_rect)
-    pygame.draw.rect(screen, "Pink", score_rect, 10)
+    pygame.draw.rect(screen, "#c0e8ec", score_rect)
+    pygame.draw.rect(screen, "#c0e8ec", score_rect, 10)
     screen.blit(score_surf, score_rect)
 
     # pygame.draw.line(screen, "Red", (0, 0), (800, 400), 1)
@@ -53,6 +64,10 @@ while True:
         snail_rect.left = 800
     screen.blit(snail_surf, snail_rect)
     screen.blit(player_surf, player_rect)
+
+    # keys = pygame.key.get_pressed()
+    # if keys[pygame.K_SPACE]:
+    #     print("Jump")
 
     # if player_rect.colliderect(snail_rect):
     #     print("COLLISION")
