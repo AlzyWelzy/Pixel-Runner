@@ -36,6 +36,12 @@ player_surf = pygame.image.load("./graphics/Player/player_walk_1.png").convert_a
 player_rect = player_surf.get_rect(midbottom=(80, 300))
 player_gravity = 0
 
+player_stand = pygame.image.load("./graphics/Player/player_stand.png").convert_alpha()
+# player_stand = pygame.transform.scale(player_stand, (200, 400))
+# player_stand = pygame.transform.scale2x(player_stand)
+player_stand = pygame.transform.rotozoom(player_stand, 0, 2)
+player_stand_rect = player_stand.get_rect(center=(400, 200))
+
 while True:
     mouse_pos = pygame.mouse.get_pos()
     for event in pygame.event.get():
@@ -118,6 +124,7 @@ while True:
 
     else:
         screen.fill((94, 129, 162))
+        screen.blit(player_stand, player_stand_rect)
 
     pygame.display.update()
     clock.tick(60)
