@@ -36,18 +36,18 @@ def display_score():
 
 pygame.init()
 screen = pygame.display.set_mode((800, 400))
-pygame.display.set_caption("Pixel Runner")
+pygame.display.set_caption("Runner")
 clock = pygame.time.Clock()
 test_font = pygame.font.Font("./font/Pixeltype.ttf", 50)
-game_active = False
+game_active = True
 start_time = 0
 
 
 sky_surface = pygame.image.load("./graphics/sky.png").convert()
 ground_surface = pygame.image.load("./graphics/ground.png").convert()
 
-game_name = test_font.render("Pixel Runner", False, (111, 196, 169))
-game_name_rect = game_name.get_rect(center=(400, 70))
+text_surf = test_font.render("My Game", False, (64, 64, 64))
+text_rect = text_surf.get_rect(center=(400, 100))
 
 
 snail_surf = pygame.image.load("./graphics/snail/snail1.png").convert_alpha()
@@ -69,8 +69,6 @@ player_stand = pygame.image.load("./graphics/Player/player_stand.png").convert_a
 player_stand = pygame.transform.rotozoom(player_stand, 0, 2)
 player_stand_rect = player_stand.get_rect(center=(400, 200))
 
-intro_surf = test_font.render("Press space bar to play the game", False, (64, 64, 64))
-intro_rect = intro_surf.get_rect(center=(400, 100))
 
 while True:
     mouse_pos = pygame.mouse.get_pos()
@@ -139,6 +137,7 @@ while True:
             player_rect.bottom = 300
 
         screen.blit(player_surf, player_rect)
+        screen.blit(text_surf, text_rect)
 
         # if player_rect.colliderect(snail_rect):
         #     print("COLLISION")
@@ -155,8 +154,6 @@ while True:
     else:
         screen.fill((94, 129, 162))
         screen.blit(player_stand, player_stand_rect)
-        screen.blit(intro_surf, intro_rect)
-        screen.blit(game_name, game_name_rect)
 
     pygame.display.update()
     clock.tick(60)
