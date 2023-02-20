@@ -19,11 +19,11 @@ snail_rect = snail_surf.get_rect(bottomright=(600, 300))
 score_surf = test_font.render("Score", False, "#404040")
 score_rect = score_surf.get_rect(center=(400, 50))
 
+player_gravity = 0
 
 player_surf = pygame.image.load("./graphics/Player/player_walk_1.png").convert_alpha()
 player_rect = player_surf.get_rect(midbottom=(80, 300))
 
-player_gravity = 0
 
 while True:
     mouse_pos = pygame.mouse.get_pos()
@@ -35,12 +35,13 @@ while True:
         if event.type == pygame.KEYDOWN:
             # print("Key Down")
             if event.key == pygame.K_SPACE:
-                print("Jump Down")
+                player_gravity = -20
+                # print("Jump Down")
 
-        if event.type == pygame.KEYUP:
-            print("Key Up")
-            # if event.key == pygame.K_SPACE:
-            #     print("Jump Down")
+        # if event.type == pygame.KEYUP:
+        #     print("Key Up")
+        # if event.key == pygame.K_SPACE:
+        #     print("Jump Down")
 
         # if event.type == pygame.MOUSEMOTION:
         # if event.type == pygame.MOUSEBUTTONDOWN:
@@ -48,8 +49,10 @@ while True:
         #     print(event.pos)
 
         # if event.type == pygame.MOUSEMOTION:
-        #     if player_rect.collidepoint(event.pos):
-        #         print("collision")
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if player_rect.collidepoint(event.pos):
+                # print("collision")
+                player_gravity = -20
 
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 300))
@@ -67,11 +70,10 @@ while True:
         snail_rect.left = 800
     screen.blit(snail_surf, snail_rect)
 
+    # Player
+    player_gravity += 1
+    player_rect.y += player_gravity
     screen.blit(player_surf, player_rect)
-
-    # keys = pygame.key.get_pressed()
-    # if keys[pygame.K_SPACE]:
-    #     print("Jump")
 
     # if player_rect.colliderect(snail_rect):
     #     print("COLLISION")
