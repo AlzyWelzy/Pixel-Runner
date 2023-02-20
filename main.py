@@ -1,22 +1,36 @@
 import pygame
 from sys import exit
+from pathlib import Path
 
-hi_score = 0
+# Set the path to the high score file
+high_score_path = Path("./high_score.txt")
+
+if high_score_path.exists():
+    # Read the high score from the file
+    with open(high_score_path, "r") as f:
+        high_score = int(f.read().strip())
+else:
+    # If file doesn't exists, set the high score to 0
+    high_score = 0
 
 
 def display_score():
-    global hi_score
+    global high_score
     current_time = (pygame.time.get_ticks() - start_time) // 1000
     score_surf = test_font.render(f"Score: {current_time}", False, (64, 64, 64))
     score_rect = score_surf.get_rect(center=(400, 50))
     screen.blit(score_surf, score_rect)
 
-    if current_time > hi_score:
-        hi_score = current_time
+    if current_time > high_score:
+        high_score = current_time
 
-    hi_score_surf = test_font.render(f"High Score: {hi_score}", False, (64, 64, 64))
-    hi_score_rect = hi_score_surf.get_rect(topleft=(10, 10))
-    screen.blit(hi_score_surf, hi_score_rect)
+        # Write the new high score to the file
+        with open(high_score_path, "w") as f:
+            f.write(str(high_score))
+
+    high_score_surf = test_font.render(f"High Score: {high_score}", False, (64, 64, 64))
+    high_score_rect = high_score_surf.get_rect(topleft=(10, 10))
+    screen.blit(high_score_surf, high_score_rect)
     # print(current_time)
 
 
