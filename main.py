@@ -3,6 +3,16 @@ from sys import exit
 from pathlib import Path
 from random import randint
 
+
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load(
+            "./graphics/Player/player_walk_1.png"
+        ).convert_alpha()
+        self.rect = self.image.get_rect(midbottom=(200, 300))
+
+
 # Set the path to the high score file
 high_score_path = Path("./high_score.txt")
 
@@ -87,6 +97,9 @@ clock = pygame.time.Clock()
 test_font = pygame.font.Font("./font/Pixeltype.ttf", 50)
 game_active = False
 start_time = 0
+
+player = pygame.sprite.GroupSingle()
+player.add(Player())
 
 score = high_score
 
