@@ -1,12 +1,22 @@
 import pygame
 from sys import exit
 
+
+def display_score():
+    current_time = (pygame.time.get_ticks() - start_time) // 1000
+    score_surf = test_font.render(f"Score: {current_time}", False, (64, 64, 64))
+    score_rect = score_surf.get_rect(center=(400, 50))
+    screen.blit(score_surf, score_rect)
+    # print(current_time)
+
+
 pygame.init()
 screen = pygame.display.set_mode((800, 400))
 pygame.display.set_caption("Runner")
 clock = pygame.time.Clock()
 test_font = pygame.font.Font("./font/Pixeltype.ttf", 50)
 game_active = True
+start_time = 0
 
 
 sky_surface = pygame.image.load("./graphics/sky.png").convert()
@@ -18,14 +28,13 @@ snail_rect = snail_surf.get_rect(bottomright=(600, 300))
 
 
 # score_surf = test_font.render("Score", False, (64, 64, 64))  """This line of code uses Tuple for RBG color code"""
-score_surf = test_font.render("Score", False, "#404040")
-score_rect = score_surf.get_rect(center=(400, 50))
+# score_surf = test_font.render("Score", False, "#404040")
+# score_rect = score_surf.get_rect(center=(400, 50))
 
-player_gravity = 0
 
 player_surf = pygame.image.load("./graphics/Player/player_walk_1.png").convert_alpha()
 player_rect = player_surf.get_rect(midbottom=(80, 300))
-
+player_gravity = 0
 
 while True:
     mouse_pos = pygame.mouse.get_pos()
@@ -47,6 +56,7 @@ while True:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 game_active = True
                 snail_rect.left = 800
+                start_time = pygame.time.get_ticks()
 
         # if event.type == pygame.KEYUP:
         #     print("Key Up")
@@ -71,9 +81,10 @@ while True:
         screen.blit(sky_surface, (0, 0))
         screen.blit(ground_surface, (0, 300))
         # screen.blit(text_surface, (300, 50))
-        pygame.draw.rect(screen, "#c0e8ec", score_rect)
-        pygame.draw.rect(screen, "#c0e8ec", score_rect, 10)
-        screen.blit(score_surf, score_rect)
+        # pygame.draw.rect(screen, "#c0e8ec", score_rect)
+        # pygame.draw.rect(screen, "#c0e8ec", score_rect, 10)
+        # screen.blit(score_surf, score_rect)
+        display_score()
 
         # pygame.draw.line(screen, "Red", (0, 0), (800, 400), 1)
         # pygame.draw.line(screen, "Red", (0, 0), pygame.mouse.get_pos(), 1)
@@ -106,7 +117,7 @@ while True:
             # exit()
 
     else:
-        screen.fill("Yellow")
+        screen.fill((94, 129, 162))
 
     pygame.display.update()
     clock.tick(60)
