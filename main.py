@@ -1,12 +1,22 @@
 import pygame
 from sys import exit
 
+hi_score = 0
+
 
 def display_score():
+    global hi_score
     current_time = (pygame.time.get_ticks() - start_time) // 1000
     score_surf = test_font.render(f"Score: {current_time}", False, (64, 64, 64))
     score_rect = score_surf.get_rect(center=(400, 50))
     screen.blit(score_surf, score_rect)
+
+    if current_time > hi_score:
+        hi_score = current_time
+
+    hi_score_surf = test_font.render(f"High Score: {hi_score}", False, (64, 64, 64))
+    hi_score_rect = hi_score_surf.get_rect(topleft=(10, 10))
+    screen.blit(hi_score_surf, hi_score_rect)
     # print(current_time)
 
 
@@ -21,7 +31,10 @@ start_time = 0
 
 sky_surface = pygame.image.load("./graphics/sky.png").convert()
 ground_surface = pygame.image.load("./graphics/ground.png").convert()
-# text_surface = test_font.render("My Game", False, "Black")
+
+text_surf = test_font.render("My Game", False, (64, 64, 64))
+text_rect = text_surf.get_rect(center=(400, 100))
+
 
 snail_surf = pygame.image.load("./graphics/snail/snail1.png").convert_alpha()
 snail_rect = snail_surf.get_rect(bottomright=(600, 300))
@@ -109,6 +122,7 @@ while True:
             player_rect.bottom = 300
 
         screen.blit(player_surf, player_rect)
+        screen.blit(text_surf, text_rect)
 
         # if player_rect.colliderect(snail_rect):
         #     print("COLLISION")
