@@ -14,7 +14,8 @@ ground_surface = pygame.image.load("./graphics/ground.png").convert()
 snail_surf = pygame.image.load("./graphics/snail/snail1.png").convert_alpha()
 snail_rect = snail_surf.get_rect(bottomright=(600, 300))
 
-# score_surf = test_font.render("Score", False, (64, 64, 64))
+
+# score_surf = test_font.render("Score", False, (64, 64, 64))  """This line of code uses Tuple for RBG color code"""
 score_surf = test_font.render("Score", False, "#404040")
 score_rect = score_surf.get_rect(center=(400, 50))
 
